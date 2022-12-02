@@ -13,7 +13,7 @@ GO
 
 CREATE TABLE [dbo].[tblAccount](
 	[AccountId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
-	[AccountNumber] [numeric](18, 0) NULL,
+	[AccountNumber] [nchar](20) NOT NULL,
 	[AccountType] [nchar](15) NULL,
 	[PersonIdentity] [nchar](10) NULL,
 	[PersonName] [nvarchar](max) NULL,
@@ -21,14 +21,15 @@ CREATE TABLE [dbo].[tblAccount](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-Drop table dbo.tblHealthCareInsurance
+Drop table dbo.tblInsurance
 GO
 
-CREATE TABLE [dbo].[tblHealthCareInsurance](
-	[HealthCareId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
-	[InsuranceNumber] [numeric](18, 0) NULL,
+CREATE TABLE [dbo].[tblInsurance](
+	[InsuranceId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[InsuranceNumber] [nchar](20) NOT NULL,
 	[PersonIdentity] [nchar](10) NULL,
 	[PersonName] [nvarchar](max) NULL,
+	[InsuranceType] [nvarchar](20) NULL,
 	[SickMonthsCount] [int] NULL,
 	[SickSalaryAmount] [decimal](15, 2) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
@@ -40,23 +41,12 @@ GO
 
 CREATE TABLE [dbo].[tblPerson](
 	[Identity] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
-	[PersonIdentity] [nchar](10) NULL,
-	[PersonNumber] [varchar](20) NULL,
+	[PersonIdentity] [nchar](20) NOT NULL,
 	[PersonName] [nvarchar](max) NULL,
-	[Image] [nvarchar](50) NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-Drop table dbo.tblPersonStatus
-GO
-
-CREATE TABLE [dbo].[tblPersonStatus](
-	[PersonStatusId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
-	[PersonIdentity] [nchar](10) NOT NULL,
 	[Luck] [tinyint] NULL,
 	[Magellit] [tinyint] NULL,
-	[Age] [int] NULL,
-) ON [PRIMARY]
+	[Age] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
 Drop table dbo.tblUnion
@@ -64,7 +54,7 @@ GO
 
 CREATE TABLE [dbo].[tblUnion](
 	[UnionId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
-	[MemberNumber] [nchar](10) NULL,
+	[MemberNumber] [nchar](20) NOT NULL,
 	[MemberName] [varchar](max) NULL,
 	[PersonIdentity] [nchar](10) NULL,
 	[Akassa] [tinyint] NULL,
@@ -78,7 +68,7 @@ GO
 
 CREATE TABLE [dbo].[tblWork](
 	[EmployeeId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
-	[EmployeeNumber] [numeric](18, 0) NULL,
+	[EmployeeNumber] [nchar](20) NOT NULL,
 	[PersonName] [nvarchar](max) NULL,
 	[PersonNumber] [nchar](10) NULL,
 	[Salary] [decimal](18, 0) NULL,
@@ -88,5 +78,17 @@ CREATE TABLE [dbo].[tblWork](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
+Drop table dbo.tblProfession
+GO
+
+CREATE TABLE [dbo].[tblProfession](
+	[ProfessionId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[ProfessionTypeIdentity] [nchar](20) NOT NULL,
+	[ProfessionType] [nvarchar](50) NULL,
+	[FirstSalary] [decimal](18, 0) NULL,
+	[PensionAge] [int] NULL,
+	[TypeOfGoal] [nvarchar](50) NULL
+) ON [PRIMARY] 
+GO
 
 
