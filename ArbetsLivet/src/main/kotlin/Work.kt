@@ -1,6 +1,6 @@
 
 class Work(
-    val employeeNumber: String?,
+    var employeeNumber: String?,
     val employee: Person?,
     var salary: Double = 0.0,
     var salaryFixedPercentage: Double = 0.0,

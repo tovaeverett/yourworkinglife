@@ -1,7 +1,7 @@
 
 class Account(
-    val accountNumber: String?,
-    val accountType: String?,
+    var accountNumber: String?,
+    var accountType: String?,
     val client: Person?,
     var amount: Double = 0.0
 ) {

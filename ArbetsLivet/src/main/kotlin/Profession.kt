@@ -1,7 +1,7 @@
 
 class Profession(
-    val professionTypeIdentity: String?,
-    val professionType: String?,
+    var professionTypeIdentity: String?,
+    var professionType: String?,
     var firstSalary: Double = 0.0,
     var pensionAge: Int = 0,
     var typeOfGoal: String = ""

@@ -1,7 +1,7 @@
 
 class Union(
-    val unionId: String?,
-    val memberNumber: String?,
+    var unionId: String?,
+    var memberNumber: String?,
     val member: Person?,
     var akassa: Boolean = false,
     var incomeInsurance: Boolean = false,

@@ -1,8 +1,8 @@
 
 class Person(
-    val personIdentity: String?,
-    val personNumber: String?,
-    val personName: String = "",
+    var personIdentity: String?,
+    var personNumber: String?,
+    var personName: String = "",
     var luck: Boolean = false,
     var magellit: Boolean = false,
     var age: Int = 20
