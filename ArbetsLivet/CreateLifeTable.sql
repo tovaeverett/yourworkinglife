@@ -15,8 +15,8 @@ CREATE TABLE [dbo].[tblAccount](
                                    [AccountId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
                                    [AccountNumber] [nchar](20) NOT NULL,
                                    [AccountType] [nchar](15) NULL,
-                                   [PersonNumber] [nchar](10) NULL,
-                                   [PersonName] [nvarchar](max) NULL,
+                                   [ClientNumber] [nchar](20) NULL,
+                                   [ClientName] [nvarchar](max) NULL,
                                    [Amount] [decimal](18, 0) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
@@ -28,8 +28,8 @@ CREATE TABLE [dbo].[tblInsurance](
                                      [InsuranceId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
                                      [InsuranceNumber] [nchar](20) NOT NULL,
                                      [InsuranceType] [nvarchar](20) NULL,
-                                     [PersonNumber] [nchar](10) NULL,
-                                     [PersonName] [nvarchar](max) NULL,
+                                     [CustomerNumber] [nchar](20) NULL,
+                                     [CustomerName] [nvarchar](max) NULL,
                                      [SickMonthsCount] [int] NULL,
                                      [SickSalaryAmount] [decimal](15, 2) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
@@ -56,7 +56,7 @@ CREATE TABLE [dbo].[tblUnion](
                                  [UnionId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
                                  [MemberNumber] [nchar](20) NOT NULL,
                                  [MemberName] [varchar](max) NULL,
-                                 [PersonNumber] [nchar](10) NULL,
+                                 [PersonNumber] [nchar](20) NULL,
                                  [Akassa] [tinyint] NULL,
                                  [IncomeInsurance] [tinyint] NULL,
                                  [UnemployedSalaryAmount] [decimal](15, 2) NULL
@@ -70,7 +70,7 @@ CREATE TABLE [dbo].[tblWork](
                                 [EmployeeId] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
                                 [EmployeeNumber] [nchar](20) NOT NULL,
                                 [PersonName] [nvarchar](max) NULL,
-                                [PersonNumber] [nchar](10) NULL,
+                                [PersonNumber] [nchar](20) NULL,
                                 [Salary] [decimal](18, 0) NULL,
                                 [SalaryFixedPercentage] [decimal](18, 0) NULL,
                                 [SalaryVariablePercentage] [decimal](18, 0) NULL,
