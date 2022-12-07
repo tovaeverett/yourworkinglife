@@ -17,6 +17,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+DROP PROCEDURE spManageAccount
+GO
+
 -- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
@@ -25,13 +28,11 @@ GO
 CREATE PROCEDURE spManageAccount
     @AccountNumber nchar(20),
     @AccountType nchar(10),
-    @PersonNumber nchar(10),
-    @PersonName nvarchar(max),
+    @ClientNumber nchar(10),
+    @ClientName nvarchar(max),
     @Amount decimal(18,0) = 0,
     @StatementType nvarchar(20) = 'insert'
-    -- Add the parameters for the stored procedure here
-    --<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>,
-    --<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+
 AS
 BEGIN
     DECLARE @AccountId numeric = NULL
@@ -48,22 +49,22 @@ BEGIN
             INSERT INTO dbo.tblAccount (
                                         AccountNumber,
                                         AccountType,
-                                        PersonNumber,
-                                        PersonName,
+                                        ClientNumber,
+                                        ClientName,
                                         Amount)
             SELECT
                 @AccountNumber,
                 @AccountType,
-                @PersonNumber,
-                @PersonName,
+                @ClientNumber,
+                @ClientName,
                 @Amount
         END
     ELSE IF @StatementType = 'update' and @AccountId is not null
         BEGIN
             UPDATE	tblAccount
             SET		AccountType = @AccountType,
-                       PersonNumber = @PersonNumber,
-                       PersonName = @PersonName,
+                       ClientNumber = @ClientNumber,
+                       ClientName = @ClientName,
                        Amount = @Amount
             WHERE
                     AccountNumber = @AccountNumber
@@ -77,10 +78,12 @@ BEGIN
             SELECT 'Cannot update account: ' + @AccountNumber + ' do not exists!'
         END
 
-    --SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
+
 END
 GO
 
+DROP PROCEDURE spManageInsurance
+GO
 
 -- =============================================
 -- Author:		<Author,,Name>
@@ -90,14 +93,12 @@ GO
 CREATE PROCEDURE spManageInsurance
     @InsuranceNumber nchar(20),
     @InsuranceType nvarchar(20),
-    @PersonNumber nchar(10),
-    @PersonName nvarchar(max),
+    @CustomerNumber nchar(10),
+    @CustomerName nvarchar(max),
     @SickMonthsCount int = 0,
     @SickSalaryAmount decimal(15,2),
     @StatementType nvarchar(20) = 'insert'
-    -- Add the parameters for the stored procedure here
-    --<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>,
-    --<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+
 AS
 BEGIN
     DECLARE @InsuranceId numeric = NULL
@@ -114,15 +115,15 @@ BEGIN
             INSERT INTO dbo.tblInsurance (
                                           InsuranceNumber,
                                           InsuranceType,
-                                          PersonNumber,
-                                          PersonName,
+                                          CustomerNumber,
+                                          CustomerName,
                                           SickMonthsCount,
                                           SickSalaryAmount)
             SELECT
                 @InsuranceNumber,
                 @InsuranceType,
-                @PersonNumber,
-                @PersonName,
+                @CustomerNumber,
+                @CustomerName,
                 @SickMonthsCount,
                 @SickSalaryAmount
         END
@@ -130,8 +131,8 @@ BEGIN
         BEGIN
             UPDATE	tblInsurance
             SET		InsuranceType = @InsuranceType,
-                    PersonNumber = @PersonNumber,
-                    PersonName = @PersonName,
+                    CustomerNumber = @CustomerNumber,
+                    CustomerName = @CustomerName,
                     SickMonthsCount = @SickMonthsCount,
                     SickSalaryAmount = @SickSalaryAmount
             WHERE
@@ -146,8 +147,10 @@ BEGIN
             SELECT 'Cannot update insurance: ' + @InsuranceNumber + ' do not exists!'
         END
 
-    --SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
 END
+GO
+
+DROP PROCEDURE spManagePerson
 GO
 
 -- =============================================
@@ -162,15 +165,11 @@ CREATE PROCEDURE spManagePerson
     @Magellit tinyint = 0,
     @Age int = 20,
     @StatementType nvarchar(20) = 'insert'
-    -- Add the parameters for the stored procedure here
-    --<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>,
-    --<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+
 AS
 BEGIN
     DECLARE @PersonId numeric = NULL
 
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
     SET NOCOUNT ON;
 
     SELECT @PersonId = PersonId FROM tblPerson WHERE PersonNumber = @PersonNumber
@@ -210,8 +209,10 @@ BEGIN
             SELECT 'Cannot update Person: ' + @PersonNumber + ' do not exists!'
         END
 
-    --SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
 END
+GO
+
+DROP PROCEDURE spManageProfession
 GO
 
 -- =============================================
@@ -226,9 +227,7 @@ CREATE PROCEDURE spManageProfession
     @PensionAge int = 66,
     @TypeOfGoal nvarchar(50),
     @StatementType nvarchar(20) = 'insert'
-    -- Add the parameters for the stored procedure here
-    --<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>,
-    --<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+
 AS
 BEGIN
     DECLARE @ProfessionId numeric = NULL
@@ -275,10 +274,11 @@ BEGIN
             SELECT 'Cannot update Union: ' + @ProfessionNumber + ' do not exists!'
         END
 
-    --SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
 END
 GO
 
+DROP PROCEDURE spManageUnion
+GO
 
 -- =============================================
 -- Author:		<Author,,Name>
@@ -293,9 +293,7 @@ CREATE PROCEDURE spManageUnion
     @IncomeInsurance tinyint = 0,
     @UnemployedSalaryAmount decimal(15,2) = 0,
     @StatementType nvarchar(20) = 'insert'
-    -- Add the parameters for the stored procedure here
-    --<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>,
-    --<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+
 AS
 BEGIN
     DECLARE @UnionId numeric = NULL
@@ -344,10 +342,11 @@ BEGIN
             SELECT 'Cannot update Union: ' + @MemberNumber + ' do not exists!'
         END
 
-    --SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
 END
 GO
 
+DROP PROCEDURE spManageWork
+GO
 
 -- =============================================
 -- Author:		<Author,,Name>
@@ -363,9 +362,7 @@ CREATE PROCEDURE spManageWork
     @SalaryVariablePercentage decimal(18,0) = 0,
     @WorkMonthCount int = 0,
     @StatementType nvarchar(20) = 'insert'
-    -- Add the parameters for the stored procedure here
-    --<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>,
-    --<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+
 AS
 BEGIN
     DECLARE @EmployeeId numeric = NULL
@@ -417,6 +414,5 @@ BEGIN
             SELECT 'Cannot update Union: ' + @EmployeeNumber + ' do not exists!'
         END
 
-    --SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
 END
 GO
