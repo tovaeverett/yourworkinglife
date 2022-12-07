@@ -1,17 +1,21 @@
-import java.util.DoubleSummaryStatistics
 
 class Work(
-    val employeeNumber: String,
-    var salary: Double,
-    var salaryFixedPercentage: Double,
-    var salaryVariablePercentage: Double,
-    var workMonthCount: Double
+    val employeeNumber: String?,
+    val employee: Person?,
+    var salary: Double = 0.0,
+    var salaryFixedPercentage: Double = 0.0,
+    var salaryVariablePercentage: Double = 0.0,
+    var workMonthCount: Int = 0
 ) {
-    fun putWork() {
+    fun registerWork() {
+        //Insert work in db
+    }
+
+    fun updateWork() {
         //Update work in db
     }
 
     fun getWork() {
-        //Show work information
+        //Select work information
     }
 }

@@ -1,16 +1,21 @@
+
 class Union(
-    val unionId: String,
-    val memberNumber: String,
-    val memberName: String,
-    var akassa: Boolean,
-    var incomeInsurance: Boolean,
-    var unEmployedSalaryAmount: Double
+    val unionId: String?,
+    val memberNumber: String?,
+    val member: Person?,
+    var akassa: Boolean = false,
+    var incomeInsurance: Boolean = false,
+    var unEmployedSalaryAmount: Double = 0.0
 ) {
-    fun putUnion() {
+    fun registerUnion() {
+        //IInsert union in db
+    }
+
+    fun updateUnion() {
         //Update union in db
     }
 
     fun getUnion() {
-        //Show union information
+        //Select union information
     }
 }

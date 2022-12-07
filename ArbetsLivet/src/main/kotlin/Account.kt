@@ -1,13 +1,20 @@
+
 class Account(
-    val accountNumber: String,
-    val accountType: String,
-    var amount: Double
+    val accountNumber: String?,
+    val accountType: String?,
+    val client: Person?,
+    var amount: Double = 0.0
 ) {
-    fun putAccount() {
+
+    fun registerAccount() {
+        //Insert account in db
+    }
+
+    fun updateAccount() {
         //Update account in db
     }
 
     fun getAccount() {
-        //Show account information
+        //Select account from db
     }
 }

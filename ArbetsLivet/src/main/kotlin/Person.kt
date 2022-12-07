@@ -1,13 +1,11 @@
-import java.awt.Image
-import javax.print.DocFlavor.STRING
 
 class Person(
-    val personIdentity: String,
-    val personNumber: String,
-    val personName: String,
-    var luck: Boolean,
-    var magellit: Boolean,
-    var age: Int
+    val personIdentity: String?,
+    val personNumber: String?,
+    val personName: String = "",
+    var luck: Boolean = false,
+    var magellit: Boolean = false,
+    var age: Int = 20
 ) {
 
     val accounts = mutableListOf<Account>()
@@ -16,12 +14,17 @@ class Person(
     val work = mutableListOf<Work>()
     val union = mutableListOf<Union>()
 
-    fun putPerson()
+    fun registerPerson()
     {
-        //Store in database
+        //Insert in database
+    }
+
+    fun updatePerson()
+    {
+        //Update in database
     }
 
     fun getPerson(){
-        //Show person status
+        //Select person status
     }
 }
