@@ -1,3 +1,3 @@
 
-rootProject.name = "ArbetsLivet"
+rootProject.name = "confexplorer"
 

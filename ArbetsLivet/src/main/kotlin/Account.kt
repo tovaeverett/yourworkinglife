@@ -1,8 +1,7 @@
 
-class Account(
+data class Account(
     var accountNumber: String?,
     var accountType: String?,
-    val client: Person?,
     var amount: Double = 0.0
 ) {
 

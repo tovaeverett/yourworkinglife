@@ -1,5 +1,5 @@
 
-class Profession(
+data class Profession(
     var professionTypeIdentity: String?,
     var professionType: String?,
     var firstSalary: Double = 0.0,

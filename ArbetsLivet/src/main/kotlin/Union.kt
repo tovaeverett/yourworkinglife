@@ -1,14 +1,15 @@
+import kotlin.random.Random
 
-class Union(
+data class Union(
     var unionId: String?,
-    var memberNumber: String?,
     val member: Person?,
     var akassa: Boolean = false,
+    var memberNumber: String?,
     var incomeInsurance: Boolean = false,
     var unEmployedSalaryAmount: Double = 0.0
 ) {
     fun registerUnion() {
-        //IInsert union in db
+        //Insert union in db
     }
 
     fun updateUnion() {

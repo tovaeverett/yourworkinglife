@@ -1,8 +1,6 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.7.21"
-    application
+    kotlin("js") version "1.7.10"
+    kotlin("plugin.serialization") version "1.7.10"
 }
 
 group = "org.example"
@@ -12,35 +10,42 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+    js {
+        browser {
+            commonWebpackConfig {
+                cssSupport.enabled = true
+            }
+        }
+        binaries.executable()
+    }
+}
+
 dependencies {
-    testImplementation(kotlin("test"))
-    implementation(kotlin("script-runtime"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("junit:junit:3.8.2")
-    testImplementation("junit:junit:4.13.1")
-    testImplementation("junit:junit:3.8.2")
+    //React, React DOM + Wrappers (chapter 3)
+    implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:1.0.0-pre.354"))
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
+
+    //Kotlin React Emotion (CSS) (chapter 3)
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
+
+    //Video Player (chapter 7)
+    implementation(npm("react-player", "2.10.1"))
+
+    //Share Buttons (chapter 7)
+    implementation(npm("react-share", "4.4.0"))
+
+    //Coroutines & serialization (chapter 8)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 }
 
-tasks.test {
-    useJUnitPlatform()
+// Heroku Deployment (chapter 9)
+tasks.register("stage") {
+    dependsOn("build")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
-application {
-    mainClass.set("MainKt")
-}
-
-tasks.jar {
-    manifest {
-        attributes["Main-Class"] = "MainKt"
-    }
-    configurations["compileClasspath"].forEach { file: File ->
-        from(zipTree(file.absoluteFile))
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension> {
+    versions.webpackCli.version = "4.10.0"
 }

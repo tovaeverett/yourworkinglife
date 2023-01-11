@@ -1,8 +1,7 @@
 
-class Insurance(
+data class Insurance(
     var insuranceNumber: String?,
     var insuranceType: String?,
-    val customer: Person?,
     var sickMonthsCount: Int = 0,
     var sickSalaryAmount: Double = 0.0
 ) {
